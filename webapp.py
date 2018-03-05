@@ -47,6 +47,7 @@ def login():
 def logout():
     session.clear()
     flash("Successfully logged out.")
+    print("logged out")
     return render_template('home.html')
 
 @app.route('/login/authorized')#the route should match the callback URL registered with the OAuth provider
@@ -54,6 +55,7 @@ def authorized():
     resp = github.authorized_response()
     if resp is None:
         session.clear()
+        print("resp = none")
         flash('Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args))      
     else:
         try:
@@ -61,10 +63,12 @@ def authorized():
             session['github_token'] = (resp['access_token'], '')
             session['user_data'] = github.get('user').data
             flash('You have successfully logged in as ' + session['user_data']['login'])
+            print("logged in")
         except:
             #clear the session and give error message
             session.clear()
             flash("Well that didn't work")
+            print("did not work")
             
     return render_template('home.html')
 
