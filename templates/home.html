@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ol>  
+      <li>{{ message }}<li>
+    </ol>
+  {% endif %}
+{% endwith %}
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -12,10 +20,6 @@
 <p>This is a sample application to demonstrate authenticating against github oauth,
 using Flask, on Heroku.</p>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <p>{{ message }}</p>
-  {% endif %}
-{% endwith %}
+
 
 {% endblock %}
