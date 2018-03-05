@@ -40,12 +40,14 @@ def home():
     return render_template('home.html')
 
 @app.route('/login')
-def login():   
+def login():
+    flash("Successfully logged in.")
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
 
 @app.route('/logout')
 def logout():
     session.clear()
+    flash("Successfully logged out.")
     return render_template('message.html', message='You were logged out')
 
 @app.route('/login/authorized')#the route should match the callback URL registered with the OAuth provider
@@ -65,7 +67,7 @@ def authorized():
             session.clear()
             flash("Well that didn't work")
             
-    return render_template('message.html')
+    return render_template('home.html')
 
 
 @app.route('/page1')
