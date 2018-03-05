@@ -1,16 +1,6 @@
 {% extends "layout.html" %}
 
-{% with messages = get_flashed_messages() %}
-  <p>here</p>
-  {% if messages %}
-   <p>here2</p>
-  {% for message in messages %}  
-    <ol>  
-      <li>{{ message }}<li>
-    </ol>
-  {% endfor %}
-  {% endif %}
-{% endwith %}
+
 
 {% block title %}Home{% endblock %}
 
