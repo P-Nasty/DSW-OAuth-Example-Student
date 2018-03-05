@@ -59,13 +59,13 @@ def authorized():
             #save user data and set log in message
             session['github_token'] = (resp['access_token'], '')
             session['user_data'] = github.get('user').data
-            message = 'You have successfully logged in as ' + session['user_data']['login']
+            flash('You have successfully logged in as ' + session['user_data']['login'])
         except:
             #clear the session and give error message
             session.clear()
-            message = "Well that didn't work"
+            flash("Well that didn't work")
             
-    return render_template('message.html', message=message)
+    return render_template('message.html')
 
 
 @app.route('/page1')
